@@ -31,9 +31,14 @@ public class LinkedList {
 
     public void print() {
         Node current = head;
+        Node temp = head;
         while(current != null) {
             System.out.print(current.value + " ");
             current = current.next;
+            if(current == temp) {
+                System.out.println("Loop detected");
+                break;
+            }
         }
         System.out.println();
     }
@@ -96,6 +101,7 @@ public class LinkedList {
     }
 
     public void reverse() {
+        System.out.println("reversing the list");
         Node prev = null;
         Node current = head;
         Node next = null;
@@ -173,6 +179,58 @@ public class LinkedList {
         size = 0;
     }
 
+    public Node linkedListGetMiddleNode(){
+        Node slow, fast, temp;
+        if(head == null || head.next == null) return null;
+        slow = fast = temp = head;
+        while(fast.next != null) {
+            slow = slow.next;
+            fast = fast.next;
+            if(fast.next != null) {
+                fast = fast.next;
+                if(temp == fast)
+                    break;
+            }
+        }
+        return slow;
+    }
+
+    public boolean linkedListHasLoop(){
+        Node slow, fast;
+        if(head == null || head.next == null) return false;
+        slow = fast = head;
+        while(fast.next != null) {
+            fast = fast.next;
+            if(fast.next != null) {
+                fast = fast.next;
+                if(slow == fast)
+                    return true; 
+            }
+        }
+        return false;
+    }
+
+    public void formLoop() {        
+        tail.next = head;
+        System.out.println("form loop");
+    }
+
+    public void removeLoop() {
+        System.out.println("remove loop");
+        if(head == null || head.next == null) return;
+        else {
+            Node temp = head;
+            Node fast = head;
+            while(fast.next != null) {
+                fast = fast.next;
+                if(temp == fast.next) {
+                    fast.next = null;
+                    return;
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
         list.add(1);
@@ -190,9 +248,6 @@ public class LinkedList {
         list.remove(2);
         list.print();
 
-        list.reverse();
-        list.print();
-
         list.sort();
         list.print();
 
@@ -206,6 +261,32 @@ public class LinkedList {
         System.out.println("Is list empty: " + list.isEmpty());
 
         list.prepend(0);
+
+        list.print();
+
+        Node n = list.linkedListGetMiddleNode();
+        System.out.println("LinkedList middle node: " + (n == null ? "null" : n.value));
+
+        System.out.println("Is linkedList hasLoop: " + list.linkedListHasLoop());
+
+        list.print();
+
+
+        list.formLoop();
+
+        list.print();
+
+        System.out.println("Is linkedList hasLoop: " + list.linkedListHasLoop());
+
+        list.print();
+
+        list.removeLoop();
+
+        System.out.println("Is linkedList hasLoop: " + list.linkedListHasLoop());
+
+        list.print();
+
+        list.reverse();
         list.print();
 
         list.clear();
