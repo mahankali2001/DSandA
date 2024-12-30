@@ -3,7 +3,6 @@ import java.util.List;
 
 public class BinaryTree {
     node root;
-    List<node> nodes = new ArrayList<>();
 
     BinaryTree(){root = null;}
 
@@ -44,6 +43,7 @@ public class BinaryTree {
 
     //root, left, right
     public void levelorder(node n){
+        List<node> nodes = new ArrayList<>();
         if(n==null) return;
         nodes.add(n);
         while (nodes.size() !=0) {
@@ -52,16 +52,25 @@ public class BinaryTree {
                 System.out.print(n1.num + "->");
                 nodes.add(n1.left);
                 nodes.add(n1.right);
-                // System.out.print(nodes.get(0).num + "->");
-                // if(nodes.get(0).left!=null)
-                //     nodes.add(nodes.get(0).left);
-                // if(nodes.get(0).right!=null)
-                //     nodes.add(nodes.get(0).right);
-                // nodes.remove(0);
-
-                //node n1 = nodes.remove(0);
             }
         }
+    }
+
+    public void insert(int val) {
+        root = insertRec(root, val);
+    }
+
+    public node insertRec(node root, int val) {
+        if(root == null) {
+            root = new node(val);
+            return root;
+        }
+        if(val < root.num) {
+            root.left = insertRec(root.left, val);
+        } else if(val > root.num) {
+            root.right = insertRec(root.right, val);
+        }
+        return root;
     }
 
     public static void main(String[] args) {
