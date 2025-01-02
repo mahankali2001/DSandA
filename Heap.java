@@ -10,21 +10,21 @@ public class Heap {
     public void insert(int value){
         heap.add(value);
         int current = heap.size() -1;
-        while(current > 0 || heap.get(current) > heap.get(parent(current))) { //pi >= 0 && heap.get(pi) < heap.get(heap.size() - 1)
-            swap(current, parent(current));
-            current = parent(current);
+        while(current > 0 || heap.get(current) > heap.get(parentIndex(current))) { //pi >= 0 && heap.get(pi) < heap.get(heap.size() - 1)
+            swap(current, parentIndex(current));
+            current = parentIndex(current);
         }
     }
 
-    public int leftChild(int i) {
+    public int leftChildIndex(int i) {
         return 2 * i + 1;
     }
 
-    public int rightChild(int i) {
+    public int rightChildIndex(int i) {
         return 2 * i + 2;
     }
 
-    public int parent(int i) {
+    public int parentIndex(int i) {
         return (i - 1) / 2;
     }
 
@@ -51,14 +51,14 @@ public class Heap {
     }
 
     public void heapify(int i) {
-        int left = leftChild(i);
-        int right = rightChild(i);
+        int leftI = leftChildIndex(i);
+        int rightI = rightChildIndex(i);
         int largest = i;
-        if(left < heap.size() && heap.get(left) > heap.get(i)) {
-            largest = left;
+        if(leftI < heap.size() && heap.get(leftI) > heap.get(i)) {
+            largest = leftI;
         }
-        if(right < heap.size() && heap.get(right) > heap.get(largest)) {
-            largest = right;
+        if(rightI < heap.size() && heap.get(rightI) > heap.get(largest)) {
+            largest = rightI;
         }
         if(largest != i) {
             swap(i, largest);
