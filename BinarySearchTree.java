@@ -32,6 +32,32 @@ public class BinarySearchTree {
         return root;
     }   
 
+    public Node insertNode(int value) {
+        if(root == null) {
+            root = new Node(value);
+            return root;
+        }
+        Node currentNode = root;
+        while(currentNode != null) {
+            if(value < currentNode.value) {
+                if(currentNode.left == null) {
+                    currentNode.left = new Node(value);
+                    return root;
+                }
+                currentNode = currentNode.left;
+            } else if(value > currentNode.value) {
+                if(currentNode.right == null) {
+                    currentNode.right = new Node(value);
+                    return root;
+                }
+                currentNode = currentNode.right;
+            } else {
+                return root;
+            }
+        }
+        return root;
+    }
+
     public boolean contains(int value) {
         return contains(root, value);
     }
