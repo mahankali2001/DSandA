@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Sort",
+            "request": "launch",
+            "mainClass": "Sort",
+            "projectName": "Java_fa96ca65"
+        },
+        {
+            "type": "java",
             "request": "attach",
             "name": "Java",
             "port": 5005,
