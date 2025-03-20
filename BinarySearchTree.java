@@ -16,6 +16,20 @@ public class BinarySearchTree {
     }
 
     public void insert(int value) {
+        // Node new_node = new Node(value);
+        // Node pos = root;
+        // while (pos != null) {
+        //     if (pos.value > value) 
+        //         if (pos.left != null) 
+        //             pos = pos.left;
+        //         else pos.left = new_node;
+        //     else if (pos.value < value) 
+        //         if (pos.right != null) 
+        //             pos = pos.right;
+        //         else pos.right = new_node;
+        //     else return;
+        // }
+        // pos = new_node;
         root = insertRec(root, value);
     }   
 
@@ -59,16 +73,21 @@ public class BinarySearchTree {
     }
 
     public boolean contains(int value) {
+        // Node temp = root;
+        // while(true) {
+        //     if(root == null) return false;
+        //     if(temp.value == value) return true;
+        //     if(value < temp.value) temp = temp.left;
+        //     else temp = temp.right;
+        // }
+        
         return contains(root, value);
     }
 
     public boolean contains(Node root, int value) {
-        if(root == null || root.value == value) {
-            return true;
-        }
-        if(value < root.value) {
-            return contains(root.left, value);
-        }
+        if(root == null) return false;
+        if(root.value == value) return true;
+        if(value < root.value) return contains(root.left, value);
         return contains(root.right, value);
     }
 
